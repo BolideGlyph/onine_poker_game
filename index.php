@@ -22,6 +22,7 @@ $hand = deal($deck);
     <script src="includes/poker.js.php"></script>
 </head>
 <body onload="javascript:init();">
+<div>ccoooolll</div>
 <div id="spacer"></div>
 <?php show_content($hand); ?>
 </body>
