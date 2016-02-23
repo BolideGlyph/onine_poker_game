@@ -23,6 +23,24 @@ const CARD_BACK = IMAGES . 'back.png';
 const CARD_BLANK = IMAGES . 'blank.png';
 
 /**
+ *  ID constants
+ */
+
+const CARD_CLASS = 'card_img';
+const CARD_ID = 'data-id';
+const CARD_SRC = 'data-src';
+
+/**
+ * Form Constants
+ */
+
+const HAND_KEY = 'hand';
+const DECK_KEY = 'deck';
+const CARD_KEY = 'card';
+const KEEP = 'keep';
+const DRAW = 'draw';
+
+/**
  * Card - [rank, suit]
  *      rank is a number from 0 - 12 (A, 2, 3,.... jack, queen, king)
  *      suit is a numbner 0 - 3 (clubs, diamonds, hearts, spades)

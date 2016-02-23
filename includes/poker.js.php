@@ -19,9 +19,49 @@ function centerContent(){
     spacer.style.height = offset + 'px';
 }
 
+function submitForm() {
+    var drawForm = document.getElementById('draw_form');
+
+    drawForm.submit();
+}
+
+function getDraw(id){
+    return document.getElementById('<?php echo CARD_KEY; ?>' + id).value;
+}
+
+function setDraw(id, draw) {
+     document.getElementById('<?php echo CARD_KEY; ?>' + id).value = draw;
+}
+
+function toggleCard(card){
+    var id = card.getAttribute('<?php echo CARD_ID ?>');
+
+    if(getDraw(id) == '<?php echo DRAW; ?>'){
+        setDraw(id, '<?php KEEP; ?>');
+        card.src = card.getAttribute('<?php echo CARD_SRC; ?> ');
+    } else {
+        setDraw(id, '<?php echo DRAW; ?>');
+        card.src = '<?php echo CARD_BACK; ?>';
+    }
+}
+
+function makeCardsClickable(){
+    var cards = [].slice.call(document.getElementsByClassName('<?php echo CARD_CLASS ?>'));
+    cards.forEach(function(card){
+        card.addEventListener('click', function(){
+            toggleCard(card);
+        });
+    });
+}
+
 function init() {
     window.addEventListener('resize', function() {
         centerContent();
     });
     centerContent();
+    var drawButton = document.getElementById('draw_button');
+    drawButton.addEventListener('click', function() {
+        submitForm();
+    });
+    makeCardsClickable();
 }

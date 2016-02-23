@@ -30,25 +30,47 @@ function card_name($card)
     return IMAGES . RANK_NAMES[$card[RANK_FIELD]] . '_of_' . SUIT_NAMES[$card[SUIT_FIELD]] . '.png';
 }
 
-function show_card($card)
+function show_card($card, $id)
 {
     echo '        <div class="card">' . "\n";
-    echo '           <img class="card_img" src="' . card_name($card) . '">' ."\n";
-    echo '        </div>';
+    echo '           <img class="card_img"';
+    echo ' ' . CARD_ID . '="' . $id . '"';
+    echo ' src="' . card_name($card) . '"';
+    echo ' ' . CARD_SRC . '="' . card_name($card) . '"';
+    echo '>' . "\n";
+    echo '        </div>' . "\n";
 }
 
 function show_hand($hand)
 {
     echo '    <div id="hand">' . "\n";
-    foreach($hand as $card){
-        show_card($card);
+    for($card = 0; $card < HAND_CARDS; $card++){
+        show_card($hand[$card], $card);
     }
     echo '    </div>' . "\n";
+}
+
+function show_draw_button(){
+    echo '  <div id="info">' . "\n";
+    echo '      <spand id="draw_button"> Draw </span>' . "\n";
+    echo '</div>' . "\n";
 }
 
 function show_content($hand)
 {
     echo '<div id="content">' . "\n";
     show_hand($hand);
+    show_draw_button();
     echo '</div>' . "\n";
+}
+
+function output_form($hand, $deack){
+    echo '<form method="POST" action="draw.php" id="draw_form">' . "\n";
+    echo '  <input type="hidden" name="' . HAND_KEY . '" value="' . urlencode(json_encode($hand)) . '">' . "\n";
+    echo '  <input type="hidden" name="' . DECK_KEY . '" value="' . urlencode(json_encode($deack)) . '">' . "\n";
+
+    for($card = 0; $card < HAND_CARDS; $card++){
+        echo '  <input type="hidden" name="' . CARD_KEY . $card . '" id="' . CARD_KEY . $card . '" value="' . KEEP . '">' . "\n";
+    }
+    echo '</form>' . "\n";
 }

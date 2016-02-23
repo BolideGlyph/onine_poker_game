@@ -15,6 +15,7 @@ require_once('poker_constants.php');
 .card_img {
     max-width: <?php echo CARD_IMAGE_PERCENT ?>;
     max-height: <?php echo CARD_IMAGE_PERCENT ?>;
+    cursor: pointer;
 }
 
 .card {
@@ -28,4 +29,16 @@ require_once('poker_constants.php');
     font-size: 0px;
     padding: <?php echo HAND_PADDING; ?>
 }
-
+#info {
+    text-align: center;
+    padding: <?php echo HAND_PADDING; ?>
+}
+#draw_button {
+    background-color: darkorange;
+    color: #c8ff8d;
+    font-family: Bell MT, Calibri, sans-serif;
+    padding: 10px 15px 10px 15px ;
+    font-size: 3em;
+    border-radius: 10px;
+    cursor: pointer;
+}

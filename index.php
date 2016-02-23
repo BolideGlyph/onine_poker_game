@@ -24,5 +24,6 @@ $hand = deal($deck);
 <body onload="javascript:init();">
 <div id="spacer"></div>
 <?php show_content($hand); ?>
+<?php output_form($hand, $deck); ?>
 </body>
 </html>
