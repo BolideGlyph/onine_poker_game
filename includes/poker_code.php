@@ -50,17 +50,34 @@ function show_hand($hand)
     echo '    </div>' . "\n";
 }
 
-function show_draw_button(){
+function show_draw_button()
+{
     echo '  <div id="info">' . "\n";
     echo '      <spand id="draw_button"> Draw </span>' . "\n";
     echo '</div>' . "\n";
 }
 
-function show_content($hand)
+function show_type($hand)
+{
+    $type = hand_type($hand);
+    $payoffs = PAYOFFS;
+    $payoff = $payoffs[$type];
+
+    echo '  <div id="info">' . "\n";
+    echo '      <spand id="hand_type">' . $type . '&mdash; </span>' . "\n";
+    echo '      <spand id="payoff" style="color: ' . ($payoff > 0 ? "green" : "red") . '">Payoff:' . PAYOFFS[$type] . '</span>' . "\n";
+    echo '</div>' . "\n";
+}
+
+function show_content($hand, $final=FALSE)
 {
     echo '<div id="content">' . "\n";
     show_hand($hand);
-    show_draw_button();
+    if ($final){
+        show_type($hand);
+    } else {
+        show_draw_button();
+    }
     echo '</div>' . "\n";
 }
 
@@ -73,4 +90,15 @@ function output_form($hand, $deack){
         echo '  <input type="hidden" name="' . CARD_KEY . $card . '" id="' . CARD_KEY . $card . '" value="' . KEEP . '">' . "\n";
     }
     echo '</form>' . "\n";
+}
+
+function draw_cards(&$hand, &$deck)
+{
+    for ($card = 0; $card < HAND_CARDS; $card++){
+        $draw = $_POST[CARD_KEY . $card];
+        if($draw === DRAW){
+            $hand[$card] = $deck[0];
+            $deck = array_slice($deck, 1);
+        }
+    }
 }

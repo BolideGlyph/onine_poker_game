@@ -8,7 +8,16 @@
 
 header('Content-type: text/javascript');
 require_once('poker_constants.php');
+require_once ('poker_code.php');
 ?>
+var CARD_KEY = '<?php echo CARD_KEY; ?>';
+var CARD_ID = '<?php echo CARD_ID ?>';
+var DRAW = '<?php echo DRAW; ?>';
+var KEEP = '<?php echo KEEP; ?>';
+var CARD_SRC = '<?php echo CARD_SRC; ?> ';
+var CARD_CLASS = '<?php echo CARD_CLASS; ?>';
+var CARD_BACK = '<?php echo CARD_BACK; ?>'
+
 
 function centerContent(){
     var content = document.getElementById('content');
@@ -26,42 +35,54 @@ function submitForm() {
 }
 
 function getDraw(id){
-    return document.getElementById('<?php echo CARD_KEY; ?>' + id).value;
+    return document.getElementById(CARD_KEY + id).value;
 }
 
 function setDraw(id, draw) {
-     document.getElementById('<?php echo CARD_KEY; ?>' + id).value = draw;
+     document.getElementById(CARD_KEY + id).value = draw;
 }
 
 function toggleCard(card){
-    var id = card.getAttribute('<?php echo CARD_ID ?>');
+    var id = card.getAttribute(CARD_ID);
 
-    if(getDraw(id) == '<?php echo DRAW; ?>'){
-        setDraw(id, '<?php KEEP; ?>');
-        card.src = card.getAttribute('<?php echo CARD_SRC; ?> ');
+    if(getDraw(id) == DRAW){
+        setDraw(id, KEEP);
+        card.src = card.getAttribute(CARD_SRC);
     } else {
-        setDraw(id, '<?php echo DRAW; ?>');
-        card.src = '<?php echo CARD_BACK; ?>';
+        setDraw(id, DRAW);
+        card.src = CARD_BACK;
     }
 }
 
 function makeCardsClickable(){
-    var cards = [].slice.call(document.getElementsByClassName('<?php echo CARD_CLASS ?>'));
+    var cards = [].slice.call(document.getElementsByClassName(CARD_CLASS));
     cards.forEach(function(card){
         card.addEventListener('click', function(){
             toggleCard(card);
         });
     });
+    for(var i = 0; i < <?php echo HAND_CARDS; ?>; i++) {
+        setDraw(i, KEEP);
+    }
 }
 
-function init() {
+function showContent() {
+    var content = document.getElementById('content');
+    content.style.visibility = 'visible';
+}
+
+function init(final) {
     window.addEventListener('resize', function() {
         centerContent();
     });
     centerContent();
-    var drawButton = document.getElementById('draw_button');
-    drawButton.addEventListener('click', function() {
-        submitForm();
-    });
-    makeCardsClickable();
+    showContent();
+    if(!final) {
+        var drawButton = document.getElementById('draw_button');
+        drawButton.addEventListener('click', function () {
+            submitForm();
+        });
+        makeCardsClickable();
+    }
+
 }

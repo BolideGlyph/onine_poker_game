@@ -12,6 +12,12 @@
 
 const CARD_IMAGE_PERCENT = '95%';
 const HAND_PADDING = '9px';
+const POKER_FONT = <<<POKER
+    font-family: Bell MT, Calibri, sans-serif;
+    padding: 10px 15px 10px 15px ;
+    font-size: 3em;
+
+POKER;
 
 /**
  * path and filename consts
@@ -81,3 +87,29 @@ const SUIT_NAMES = [
  */
 
 const HAND_CARDS = 5;
+
+const NOTHING = "No Pair";
+const PAIR_JACKS = "One Pair, Jacks or Better";
+const LOW_PAIR = "One Pair, Less than Jacks";
+const TWO_PAIR = "Two Pairs";
+const TRIPS = "Three of a kind";
+const STRAIGHT = "Straight";
+const FLUSH = "Flush";
+const FULL_HOUSE = "Full House";
+const QUADS = "Four of a Kind";
+const STRAIGHT_FLUSH = "Straight Flush";
+const ROYAL_FLUSH = "Royal Flush";
+
+const PAYOFFS = [
+    NOTHING => 0,
+    PAIR_JACKS => 1,
+    LOW_PAIR => 0,
+    TWO_PAIR => 2,
+    TRIPS => 3,
+    STRAIGHT => 4,
+    FLUSH => 6,
+    FULL_HOUSE => 9,
+    QUADS => 25,
+    STRAIGHT_FLUSH => 50,
+    ROYAL_FLUSH => 800
+];

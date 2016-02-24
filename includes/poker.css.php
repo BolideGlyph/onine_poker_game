@@ -36,9 +36,16 @@ require_once('poker_constants.php');
 #draw_button {
     background-color: darkorange;
     color: #c8ff8d;
-    font-family: Bell MT, Calibri, sans-serif;
-    padding: 10px 15px 10px 15px ;
-    font-size: 3em;
+    <?php echo POKER_FONT; ?>
     border-radius: 10px;
     cursor: pointer;
+}
+#payoff {
+    <?php echo POKER_FONT; ?>
+}
+#hand_type {
+    <?php echo POKER_FONT; ?>
+}
+#content {
+    visibility: hidden;
 }
