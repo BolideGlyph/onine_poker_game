@@ -86,7 +86,7 @@ const SUIT_NAMES = [
  * Hand constants
  */
 
-const HAND_CARDS = 5;
+const HAND_CARDS = 20;
 
 const NOTHING = "No Pair";
 const PAIR_JACKS = "One Pair, Jacks or Better";
